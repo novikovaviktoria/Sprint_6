@@ -8,6 +8,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -24,14 +26,15 @@ public class LionTest {
     Feline feline;
 
     @Test
-    public void TestGetFood() throws Exception {
+    public void testGetFood() throws Exception {
+        List<String> expectedFood = List.of("Мясо", "Птица");
+        when(feline.getFood("Хищник")).thenReturn(expectedFood);
         Lion lion = new Lion(GENDER_MALE, feline);
-        lion.getFood();
-        verify(feline).getFood(Mockito.anyString());
+        assertEquals(expectedFood, lion.getFood());
     }
 
     @Test
-    public void TestDoesHasManeException() {
+    public void testDoesHasManeException() {
         try {
             new Lion(EXCEPTION_GENDER, feline);
         } catch (Exception exception) {
@@ -40,7 +43,7 @@ public class LionTest {
     }
 
     @Test
-    public void TestGetOneKitten() throws Exception {
+    public void testGetOneKitten() throws Exception {
         Lion lion = new Lion(GENDER_FEMALE, feline);
         when(feline.getKittens()).thenReturn(1);
         int actualCountOfKittens = lion.getKittens(KITTENS_COUNT);

@@ -28,7 +28,7 @@ public class LionParamSamkaSameyTest {
     }
 
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "SEX {0}: {1}")
     public static Object[][] getSex() {
         return new Object[][]{
                 {"Самец", true},
@@ -37,7 +37,7 @@ public class LionParamSamkaSameyTest {
     }
 
     @Test
-    public void TestDoesLionHasMane() throws Exception {
+    public void testDoesLionHasMane() throws Exception {
         Lion lion = new Lion(gender, feline);
         boolean actualHasMane = lion.doesHaveMane();
         Assert.assertEquals(hasMane, actualHasMane);
