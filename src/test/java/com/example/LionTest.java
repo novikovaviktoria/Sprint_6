@@ -27,10 +27,13 @@ public class LionTest {
 
     @Test
     public void testGetFood() throws Exception {
-        List<String> expectedFood = List.of("Мясо", "Птица");
+        List<String> expectedFood = List.of("Животные", "Птицы", "Рыба");
         when(feline.getFood("Хищник")).thenReturn(expectedFood);
         Lion lion = new Lion(GENDER_MALE, feline);
-        assertEquals(expectedFood, lion.getFood());
+        List<String> actualFood = lion.getFood();
+        Assert.assertEquals("Лев должен возвращать список еды для хищника",
+                expectedFood, actualFood);
+        verify(feline).getFood("Хищник");
     }
 
     @Test
